@@ -4,15 +4,40 @@
 resource "random_pet" "this" {}
 
 #######################################################
-# jumpbox
+# vpc
+#######################################################
+module "vpc" {
+  source               = "terraform-aws-modules/vpc/aws"
+  version              = "5.21.0"
+  name                 = random_pet.this.id
+  cidr                 = var.cidr
+  azs                  = [data.aws_availability_zones.this[0].names]
+  private_subnets      = [cidrsubnet(var.cidr, 0, 0)]
+  enable_nat_gateway   = true
+  single_nat_gateway   = true
+  enable_dns_hostnames = true
+}
+
+#######################################################
+# vpc endpoint
+#######################################################
+resource "aws_vpc_endpoint" "this" {
+  vpc_id       = aws_vpc.this.id
+  service_name = "com.amazonaws.${var.region}.s3"
+}
+
+#######################################################
+# instance
 #######################################################
 resource "aws_instance" "this" {
-  ami           = data.aws_ami.this.
-  instance_type = var.instance_type
-  tags = {
+  ami                  = data.aws_ami.this.id
+  instance_type        = var.instance_type
+  iam_instance_profile = aws_iam_role.this.name
+  subnet_id            = module.vpc.private_subnets[0]
+  tags   = {
     Name = random_pet.this.id
   }
-    user_data = <<EOF
+  user_data = <<EOF
 #!/bin/bash
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
@@ -30,5 +55,48 @@ EOF
 }
 
 #######################################################
+# iam
+#######################################################
+resource "aws_iam_role" "this" {
+  assume_role_policy = jsonencode({
+    Version       = "2012-10-17"
+    Statement     = [
+      {
+        Action    = "sts:AssumeRole"
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+        Effect    = "Allow"
+        Sid       = "s3fullaccess"
+      },
+    ]
+  })
+}
+
+resource "aws_iam_policy" "this" {
+  policy          = jsonencode({
+    Version       = "2012-10-17"
+    Statement     = [
+      {   
+        Sid       = "AllowListObjects"
+        Effect    = "Allow"
+        Action    = [
+          "s3:*"
+        ]
+        Resource  = [aws_s3_bucket.this.arn]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "this" {
+  role       = aws_iam_role.this.name
+  policy_arn = aws_iam_policy.this.arn
+}
+
+#######################################################
 # s3
 #######################################################
+resource "aws_s3_bucket" "this" {
+  bucket = "data.aws_caller_identity.this.account_id"
+}

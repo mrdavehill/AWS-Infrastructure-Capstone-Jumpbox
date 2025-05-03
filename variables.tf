@@ -7,9 +7,17 @@ variable "region" {
 }
 
 #######################################################
+# vpc
+#######################################################
+variable "cidr" {
+    type        = string
+    description = "RFC1918 CIDR block for the VPC." 
+}
+
+#######################################################
 # instance
 #######################################################
 variable "instance_type" {
     type        = string
-    description = "Instance type"
+    description = "Instance type."
 }
