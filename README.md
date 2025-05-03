@@ -1,6 +1,6 @@
 ## Hello friends
 
-
+This repo creates a vpc, ec2 jumpbox loaded with terraform, kubectl and eksctl, an s3 bucket to hold remote Terraform state and an interface gateway to privately reach it - all to be used as a dev environment for AWS platform engineering.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -49,12 +49,12 @@
 
 | Name | Description |
 |------|-------------|
-| <a name="output_aws_iam_policy"></a> [aws\_iam\_policy](#output\_aws\_iam\_policy) | n/a |
-| <a name="output_aws_iam_role"></a> [aws\_iam\_role](#output\_aws\_iam\_role) | ###################################################### iam ###################################################### |
-| <a name="output_aws_iam_role_policy_attachment"></a> [aws\_iam\_role\_policy\_attachment](#output\_aws\_iam\_role\_policy\_attachment) | n/a |
-| <a name="output_aws_instance"></a> [aws\_instance](#output\_aws\_instance) | ###################################################### instance ###################################################### |
-| <a name="output_aws_s3_bucket"></a> [aws\_s3\_bucket](#output\_aws\_s3\_bucket) | ###################################################### s3 ###################################################### |
-| <a name="output_aws_vpc_endpoint"></a> [aws\_vpc\_endpoint](#output\_aws\_vpc\_endpoint) | ###################################################### vpc endpoint ###################################################### |
-| <a name="output_random_pet"></a> [random\_pet](#output\_random\_pet) | ###################################################### pet name ###################################################### |
-| <a name="output_vpc"></a> [vpc](#output\_vpc) | ###################################################### vpc ###################################################### |
+| <a name="output_aws_iam_policy"></a> [aws\_iam\_policy](#output\_aws\_iam\_policy) | The iam policy outputs. |
+| <a name="output_aws_iam_role"></a> [aws\_iam\_role](#output\_aws\_iam\_role) | The iam role outputs. |
+| <a name="output_aws_iam_role_policy_attachment"></a> [aws\_iam\_role\_policy\_attachment](#output\_aws\_iam\_role\_policy\_attachment) | The iam policy attachment outputs. |
+| <a name="output_aws_instance"></a> [aws\_instance](#output\_aws\_instance) | The ec2 outputs. |
+| <a name="output_aws_s3_bucket"></a> [aws\_s3\_bucket](#output\_aws\_s3\_bucket) | The s3 bucket outputs. |
+| <a name="output_aws_vpc_endpoint"></a> [aws\_vpc\_endpoint](#output\_aws\_vpc\_endpoint) | The s3 vpc endpoint outputs. |
+| <a name="output_random_pet"></a> [random\_pet](#output\_random\_pet) | This is the vpc name. |
+| <a name="output_vpc"></a> [vpc](#output\_vpc) | All vpc module outputs. |
 <!-- END_TF_DOCS -->
