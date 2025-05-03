@@ -22,7 +22,7 @@ module "vpc" {
 # vpc endpoint
 #######################################################
 resource "aws_vpc_endpoint" "this" {
-  vpc_id       = aws_vpc.this.id
+  vpc_id       = module.vpc.id
   service_name = "com.amazonaws.${var.region}.s3"
 }
 
