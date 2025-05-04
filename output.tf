@@ -10,10 +10,10 @@ output "random_pet" {
 # vpc
 #######################################################
 output "vpc" {
-  value       = module.vpc.this
+  value       = module.vpc
   description = "All vpc module outputs."
 }
-
+/*
 #######################################################
 # vpc endpoint
 #######################################################
@@ -21,7 +21,7 @@ output "aws_vpc_endpoint" {
   value       = aws_vpc_endpoint.this
   description = "The s3 vpc endpoint outputs."
 }
-
+*/
 #######################################################
 # instance
 #######################################################

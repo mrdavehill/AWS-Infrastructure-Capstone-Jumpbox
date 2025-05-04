@@ -11,13 +11,13 @@ module "vpc" {
   version              = "5.21.0"
   name                 = random_pet.this.id
   cidr                 = var.cidr
-  azs                  = [data.aws_availability_zones.this[0].names]
+  azs                  = slice(data.aws_availability_zones.this.names, 0, 0)
   private_subnets      = [cidrsubnet(var.cidr, 0, 0)]
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
 }
-
+/*
 #######################################################
 # vpc endpoint
 #######################################################
@@ -25,7 +25,7 @@ resource "aws_vpc_endpoint" "this" {
   vpc_id       = module.vpc.id
   service_name = "com.amazonaws.${var.region}.s3"
 }
-
+*/
 #######################################################
 # instance
 #######################################################
@@ -78,12 +78,21 @@ resource "aws_iam_policy" "this" {
     Version       = "2012-10-17"
     Statement     = [
       {   
-        Sid       = "AllowListObjects"
+        Sid       = "ListObjects"
         Effect    = "Allow"
         Action    = [
-          "s3:*"
+          "s3:ListBucket"
         ]
         Resource  = [aws_s3_bucket.this.arn]
+      },
+      {   
+        Sid       = "GetPutObjects"
+        Effect    = "Allow"
+        Action    = [
+          "s3:GetObject",
+          "s3:PutObject"
+        ]
+        Resource  = ["${aws_s3_bucket.this.arn}/*"]
       }
     ]
   })
@@ -98,5 +107,5 @@ resource "aws_iam_role_policy_attachment" "this" {
 # s3
 #######################################################
 resource "aws_s3_bucket" "this" {
-  bucket = "data.aws_caller_identity.this.account_id"
+  bucket = data.aws_caller_identity.this.account_id
 }
