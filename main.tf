@@ -33,7 +33,7 @@ resource "aws_instance" "this" {
   iam_instance_profile        = aws_iam_instance_profile.this.name
   associate_public_ip_address = var.associate_public_ip_address
   subnet_id                   = module.vpc.public_subnets[0]
-  security_groups             = [aws_security_group.this.name]
+  security_groups             = [aws_security_group.this.id]
   tags   = {
     Name = random_pet.this.id
   }
@@ -52,6 +52,7 @@ curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$
 tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
 sudo mv /tmp/eksctl /usr/local/bin
 EOF
+
 }
 
 resource "aws_iam_instance_profile" "this" {
