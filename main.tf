@@ -72,7 +72,7 @@ resource "aws_security_group_rule" "egress" {
   type              = "egress"
   to_port           = 0
   protocol          = "-1"
-  cidr_blocks       = "0.0.0.0/0"
+  cidr_blocks       = ["0.0.0.0/0"]
   from_port         = 0
   security_group_id = aws_security_group.this.id
 }
@@ -80,8 +80,8 @@ resource "aws_security_group_rule" "egress" {
 resource "aws_security_group_rule" "ingress" {
   type              = "ingress"
   to_port           = 22
-  protocol          = tcp
-  cidr_blocks       = "0.0.0.0/0"
+  protocol          = "tcp"
+  cidr_blocks       = []"0.0.0.0/0"]
   from_port         = 22
   security_group_id = aws_security_group.this.id
 }
