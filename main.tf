@@ -13,8 +13,6 @@ module "vpc" {
   cidr                 = var.cidr
   azs                  = slice(data.aws_availability_zones.this.names, 0, 1)
   public_subnets       = [cidrsubnet(var.cidr, 1, 0)]
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
   enable_dns_hostnames = true
 }
 
