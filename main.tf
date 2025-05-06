@@ -124,12 +124,12 @@ resource "aws_iam_policy" "this" {
         Resource  = ["${aws_s3_bucket.this.arn}/*"]
       },
       {
-          "Sid": "AmazonFullAccess",
-          "Effect": "Allow",
-          "Action": [
-              "*"
-          ],
-          "Resource": "*"
+        "Sid": "AmazonFullAccess",
+        "Effect": "Allow",
+        "Action": [
+            "*"
+        ],
+        "Resource": "*"
       }
     ]
   })
