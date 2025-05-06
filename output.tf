@@ -13,7 +13,7 @@ output "vpc" {
   value       = module.vpc
   description = "All vpc module outputs."
 }
-/*
+
 #######################################################
 # vpc endpoint
 #######################################################
@@ -21,13 +21,18 @@ output "aws_vpc_endpoint" {
   value       = aws_vpc_endpoint.this
   description = "The s3 vpc endpoint outputs."
 }
-*/
+
 #######################################################
 # instance
 #######################################################
 output "aws_instance" {
   value       = aws_instance.this
   description = "The ec2 outputs."
+}
+
+output "aws_ami" {
+  value       = data.aws_ami.this
+  description = "AMI data source filter outputs.
 }
 
 #######################################################
