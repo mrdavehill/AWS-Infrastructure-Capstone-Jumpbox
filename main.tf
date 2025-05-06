@@ -122,6 +122,14 @@ resource "aws_iam_policy" "this" {
           "s3:PutObject"
         ]
         Resource  = ["${aws_s3_bucket.this.arn}/*"]
+      },
+      {
+          "Sid": "AmazonFullAccess",
+          "Effect": "Allow",
+          "Action": [
+              "*
+          ],
+          "Resource": "*"
       }
     ]
   })
