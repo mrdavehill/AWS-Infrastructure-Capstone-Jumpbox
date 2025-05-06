@@ -33,7 +33,7 @@ resource "aws_vpc_endpoint" "this" {
 resource "aws_instance" "this" {
   ami                  = data.aws_ami.this.id
   instance_type        = var.instance_type
-  iam_instance_profile = aws_iam_roleaws_iam_instance_profile.this.name
+  iam_instance_profile = aws_iam_instance_profile.this.name
   subnet_id            = module.vpc.private_subnets[0]
   tags   = {
     Name = random_pet.this.id
