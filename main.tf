@@ -33,7 +33,7 @@ resource "aws_vpc_endpoint" "this" {
 resource "aws_instance" "this" {
   ami                  = data.aws_ami.this.id
   instance_type        = var.instance_type
-  iam_instance_profile = aws_iam_role.this.name
+  iam_instance_profile = aws_iam_roleaws_iam_instance_profile.this.name
   subnet_id            = module.vpc.private_subnets[0]
   tags   = {
     Name = random_pet.this.id
@@ -53,6 +53,11 @@ curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$
 tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
 sudo mv /tmp/eksctl /usr/local/bin
 EOF
+}
+
+resource "aws_iam_instance_profile" "this" {
+  name = "test_profile"
+  role = aws_iam_role.this.name
 }
 
 #######################################################
@@ -108,5 +113,5 @@ resource "aws_iam_role_policy_attachment" "this" {
 # s3
 #######################################################
 resource "aws_s3_bucket" "this" {
-  bucket = data.aws_caller_identity.this.account_id
+  bucket = "${data.aws_caller_identity.this.account_id}-${var.region}
 }
