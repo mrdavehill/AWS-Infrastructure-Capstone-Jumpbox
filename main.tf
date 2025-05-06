@@ -33,6 +33,7 @@ resource "aws_instance" "this" {
   iam_instance_profile        = aws_iam_instance_profile.this.name
   associate_public_ip_address = var.associate_public_ip_address
   subnet_id                   = module.vpc.public_subnets[0]
+  security_groups             = [aws_security_group.this.name]
   tags   = {
     Name = random_pet.this.id
   }
