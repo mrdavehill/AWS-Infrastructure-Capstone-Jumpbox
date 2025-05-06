@@ -63,13 +63,12 @@ resource "aws_iam_instance_profile" "this" {
 # security groups
 #######################################################
 resource "aws_security_group" "this" {
-  name        = "egress"
-  description = "Allow all"
-  vpc_id      = module.vpc.vpc_id
+  name              = random_pet.this.id
+  description       = "Allow all"
+  vpc_id            = module.vpc.vpc_id
 }
 
-resource "aws_security_group_rule" "egress" {
-  type              = "egress"
+resource "aws_vpc_security_group_egress_rule" "this" {
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
@@ -77,8 +76,7 @@ resource "aws_security_group_rule" "egress" {
   security_group_id = aws_security_group.this.id
 }
 
-resource "aws_security_group_rule" "ingress" {
-  type              = "ingress"
+resource "aws_vpc_security_group_ingress_rule" "this" {
   to_port           = 22
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
