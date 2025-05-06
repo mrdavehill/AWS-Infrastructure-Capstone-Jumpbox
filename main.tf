@@ -12,8 +12,7 @@ module "vpc" {
   name                 = random_pet.this.id
   cidr                 = var.cidr
   azs                  = slice(data.aws_availability_zones.this.names, 0, 1)
-  private_subnets      = [cidrsubnet(var.cidr, 1, 0)]
-  public_subnets       = [cidrsubnet(var.cidr, 1, 1)]
+  public_subnets       = [cidrsubnet(var.cidr, 1, 0)]
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
@@ -35,7 +34,7 @@ resource "aws_instance" "this" {
   instance_type               = var.instance_type
   iam_instance_profile        = aws_iam_instance_profile.this.name
   associate_public_ip_address = var.associate_public_ip_address
-  subnet_id                   = module.vpc.private_subnets[0]
+  subnet_id                   = module.vpc.public_subnets[0]
   tags   = {
     Name = random_pet.this.id
   }
