@@ -127,7 +127,7 @@ resource "aws_iam_policy" "this" {
           "Sid": "AmazonFullAccess",
           "Effect": "Allow",
           "Action": [
-              "*
+              "*"
           ],
           "Resource": "*"
       }
