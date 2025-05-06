@@ -36,6 +36,15 @@ output "aws_ami" {
 }
 
 #######################################################
+# security groups
+#######################################################
+output  "aws_security_group" {
+  value       = aws_security_group.this
+  description = "Security group outputs"
+}
+
+
+#######################################################
 # iam
 #######################################################
 output "aws_iam_role" {
