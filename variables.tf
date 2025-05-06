@@ -3,7 +3,7 @@
 #######################################################
 variable "region" {
   type        = string
-  description = "The region the provider will be configured for"
+  description = "The region the provider will be configured for."
 }
 
 #######################################################
@@ -20,4 +20,9 @@ variable "cidr" {
 variable "instance_type" {
     type        = string
     description = "Instance type."
+}
+
+variable "associate_public_ip_address" {
+    type        = bool
+    description = "Allocate a public IP - used for ec2 instance connect."
 }
