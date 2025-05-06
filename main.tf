@@ -11,8 +11,9 @@ module "vpc" {
   version              = "5.21.0"
   name                 = random_pet.this.id
   cidr                 = var.cidr
-  azs                  = slice(data.aws_availability_zones.this.names, 0, 0)
-  private_subnets      = [cidrsubnet(var.cidr, 0, 0)]
+  azs                  = slice(data.aws_availability_zones.this.names, 0, 1)
+  private_subnets      = [cidrsubnet(var.cidr, 1, 0)]
+  public_subnets       = [cidrsubnet(var.cidr, 1, 1)]
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
