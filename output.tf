@@ -32,7 +32,7 @@ output "aws_instance" {
 
 output "aws_ami" {
   value       = data.aws_ami.this
-  description = "AMI data source filter outputs.
+  description = "AMI data source filter outputs."
 }
 
 #######################################################
