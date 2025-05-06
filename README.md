@@ -1,6 +1,6 @@
 ## Hello friends
 
-This repo creates a vpc with a single private subnet, ec2 jumpbox loaded with terraform, kubectl and eksctl, an s3 bucket to hold remote Terraform state and an interface gateway to privately reach it - all to be used as a dev environment for AWS platform engineering.
+This repo creates a vpc with a single public subnet, ec2 jumpbox loaded with updated awscli, terraform, kubectl, eksctl and aws-iam-authenticator, an s3 bucket to hold remote Terraform state and an interface gateway to privately reach it - all to be used as a dev environment for AWS platform engineering.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
