@@ -18,7 +18,7 @@ module "vpc" {
   single_nat_gateway   = true
   enable_dns_hostnames = true
 }
-/*
+
 #######################################################
 # vpc endpoint
 #######################################################
@@ -26,7 +26,7 @@ resource "aws_vpc_endpoint" "this" {
   vpc_id       = module.vpc.id
   service_name = "com.amazonaws.${var.region}.s3"
 }
-*/
+
 #######################################################
 # instance
 #######################################################
