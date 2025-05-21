@@ -57,6 +57,9 @@ sudo mv /tmp/eksctl /usr/local/bin
 curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/aws-iam-authenticator
 chmod +x ./aws-iam-authenticator
 sudo mv ./aws-iam-authenticator /usr/local/bin
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
 EOF
 }
 
