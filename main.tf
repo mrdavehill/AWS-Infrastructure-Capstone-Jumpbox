@@ -60,6 +60,10 @@ sudo mv ./aws-iam-authenticator /usr/local/bin
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
+sudo service docker start
+sudo yum update -y
+sudo yum -y install docker
+sudo systemctl enable docker
 EOF
 }
 
